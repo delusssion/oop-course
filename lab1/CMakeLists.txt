@@ -10,3 +10,18 @@ add_library(array_ops array_ops.cpp)
 
 add_executable(lab1 main.cpp)
 target_link_libraries(lab1 array_ops)
+
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+add_executable(lab1_tests test_variant.cpp)
+target_link_libraries(lab1_tests array_ops GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(lab1_tests)
